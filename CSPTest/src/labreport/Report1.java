@@ -24,15 +24,17 @@ public class Report1 {
             int id=sc.nextInt();
             //id 为学号，通过学号移动学生
             int change=sc.nextInt();
-            //change为变化
+            //change为位置变化
             int pos=list.indexOf(id);
-            //id的位置为pos
+            //id出队前的的位置为pos
             list.remove((Integer)id);
-            //id出列
+            //id离开队伍
             list.add(pos+change, id);
+            //id进入队伍，进入位置是计算好的(离开前+变动)
+            //不考虑位置变化不合法的情况
         }
-        for(int i=0;i<list.size();i++){
-            System.out.print(list.get(i)+" ");
+        for (Integer integer : list) {
+            System.out.print(integer + " ");
         }
     }
 }
