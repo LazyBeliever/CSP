@@ -71,9 +71,9 @@ public class Report2 {
             }
         }
         System.out.println();
-
+        //后手玩家英雄生命值
         System.out.println(player[1].hero.health);
-        //先手玩家场上card
+        //后手玩家场上card
         int exitCards2=player[1].cards.size();
         System.out.print(exitCards2);
         if(exitCards2!=0){
