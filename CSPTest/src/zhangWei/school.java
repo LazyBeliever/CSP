@@ -1,4 +1,4 @@
-package test;
+package zhangWei;
 
 class Szu{
     Collage[] collages;
