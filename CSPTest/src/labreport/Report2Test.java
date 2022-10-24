@@ -10,8 +10,6 @@ class Report2Test {
 
     @Test
      void main() {
-        Report2 test=new Report2();
-
         String[] args={
                 "summon 1 3 6",
                 "summon 2 4 2",
@@ -21,7 +19,7 @@ class Report2Test {
                 "attack 1 2",
                 "end",
                 "attack 1 1"};
-        ArrayList<Integer>[] result=new ArrayList[5];
+        ArrayList<Integer>[] result =new ArrayList[5];
         result[0]=new ArrayList<>();
         result[1]=new ArrayList<>();
         result[2]=new ArrayList<>();
@@ -34,8 +32,10 @@ class Report2Test {
         result[3].add(30);
         result[4].add(1);
         result[4].add(2);
-        ArrayList<Integer>[] result2=test.game(args);
-        for(int j=0;j<5;j++){
+        ArrayList<Integer>[] result2=Report2.game(args);
+
+        final int resultLine =5;
+        for(int j=0;j<resultLine;j++){
             for(int i=0;i<result[j].size();i++){
                 assertEquals(result[j].get(i),result2[j].get(i));
             }
@@ -44,9 +44,8 @@ class Report2Test {
 
     @Test
     void change(){
-        Report2 test=new Report2();
         String s="1212212";
-        int res=test.changeToInt(s);
+        int res= Report2.changeToInt(s);
         assertEquals(res,1212212);
     }
 }

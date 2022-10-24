@@ -22,7 +22,8 @@ public class Report2 {
         result[3]=new ArrayList<>();
         result[4]=new ArrayList<>();
         result=game(operation);
-        for(int i=0;i<5;i++){
+        final int resultLine=5;
+        for(int i=0;i<resultLine;i++){
             if(!result[i].isEmpty())
             {
                 for(int j=0;j<result[i].size();j++){
