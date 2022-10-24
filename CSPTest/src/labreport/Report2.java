@@ -9,81 +9,32 @@ import java.util.Scanner;
 public class Report2 {
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
-        Player[] player=new Player[2];
-        player[0]=new Player();
-        player[1]=new Player();
-        int who=0;
-        int operationTimes=sc.nextInt();
-        String op;
-        int position;
-        int hp;
-        int atk;
-        int offensive;
-        int defense;
-        for (int i = 0; i < operationTimes; i++) {
-            op=sc.next();
-            switch(op){
-                case "summon":
-                    position=sc.nextInt();
-                    atk=sc.nextInt();
-                    hp=sc.nextInt();
-                    Card card=new Card(hp,atk);
-                    player[who].summon(card,position-1);
-                    break;
-                case"attack":
-                    offensive=sc.nextInt()-1;
-                    //此处-1是因为下标和编号有1的差距
-                    defense=sc.nextInt();
-                    if(defense!=0){
-                        defense-=1;
-                        //此处是因为下标和编号有1的差距
-                        player[who].attackCard(offensive,player[(who+1)%2].cards.get(defense));
-                        player[who].check(offensive);
-                        player[(who+1)%2].check(defense);
-                    }else{
-                        player[who].attackHero(offensive,player[(who+1)%2].hero);
-                    }
-                    break;
-                case "end":
-                    who=(who+1)%2;
-                    break;
-                default:
-                    break;
-            }
+        int n=sc.nextInt();
+        String temp=sc.nextLine();
+        String[] operation=new String[n];
+        for (int i = 0; i < n; i++) {
+            operation[i]=sc.nextLine();
         }
-        //胜负
-        if(player[0].hero.health>0&&player[1].hero.health>0){
-            System.out.println(0);
-        }else if(player[0].hero.health<=0){
-            System.out.println(-1);
-        }else{
-            System.out.println(1);
-        }
-        //先手玩家英雄生命值
-        System.out.println(player[0].hero.health);
-        //先手玩家场上card
-        int exitCards=player[0].cards.size();
-        System.out.print(exitCards);
-        if(exitCards!=0){
-            System.out.print(" ");
-            for (int i = 0; i < exitCards; i++) {
-                System.out.print(player[0].cards.get(i).health+" ");
+        ArrayList<Integer>[] result=new ArrayList[5];
+        result[0]= new ArrayList<>();
+        result[1]=new ArrayList<>();
+        result[2]=new ArrayList<>();
+        result[3]=new ArrayList<>();
+        result[4]=new ArrayList<>();
+        result=game(operation);
+        for(int i=0;i<5;i++){
+            if(!result[i].isEmpty())
+            {
+                for(int j=0;j<result[i].size();j++){
+                    System.out.print(result[i].get(j)+" ");
+                }
+            }else{
+                System.out.print(0);
             }
-        }
-        System.out.println();
-        //后手玩家英雄生命值
-        System.out.println(player[1].hero.health);
-        //后手玩家场上card
-        int exitCards2=player[1].cards.size();
-        System.out.print(exitCards2);
-        if(exitCards2!=0){
-            System.out.print(" ");
-            for (int i = 0; i < exitCards2; i++) {
-                System.out.print(player[1].cards.get(i).health+" ");
-            }
+            System.out.println();
         }
     }
-    public ArrayList[] game(String[] s){
+    public static ArrayList[] game(String[] s){
         int  operationTimes=s.length;
         Player[] players=new Player[2];
         players[0]=new Player();
@@ -93,16 +44,16 @@ public class Report2 {
             String[] temp=s[i].split(" ");
             switch(temp[0]){
                 case "summon":
-                    int position=(int)temp[1].charAt(0)-'0';
-                    int atk=(int)temp[2].charAt(0)-'0';
-                    int hp=(int)temp[3].charAt(0)-'0';
+                    int position=changeToInt(temp[1]);
+                    int atk=changeToInt(temp[2]);
+                    int hp=changeToInt(temp[3]);
                     Card card=new Card(hp,atk);
                     players[who].summon(card,position-1);
                     break;
                 case"attack":
-                    int offensive=(int)temp[1].charAt(0)-'0'-1;
+                    int offensive=changeToInt(temp[1])-1;
                     //此处-1是因为下标和编号有1的差距
-                    int defense=(int)temp[2].charAt(0)-'0';
+                    int defense=changeToInt(temp[2]);
                     if(defense!=0){
                         defense-=1;
                         //此处是因为下标和编号有1的差距
@@ -121,11 +72,11 @@ public class Report2 {
             }
         }
         ArrayList<Integer>[] result=new ArrayList[5];
-        result[0]=new ArrayList<Integer>();
-        result[1]=new ArrayList<Integer>();
-        result[2]=new ArrayList<Integer>();
-        result[3]=new ArrayList<Integer>();
-        result[4]=new ArrayList<Integer>();
+        result[0]= new ArrayList<>();
+        result[1]=new ArrayList<>();
+        result[2]=new ArrayList<>();
+        result[3]=new ArrayList<>();
+        result[4]=new ArrayList<>();
 
         if(players[0].hero.health>0&&players[1].hero.health>0){
             result[0].add(0);
@@ -148,13 +99,19 @@ public class Report2 {
         //后手玩家场上card
         int exitCards2=players[1].cards.size();
         result[4].add(exitCards2);
-        System.out.print(exitCards2);
         if(exitCards2!=0){
             for (int i = 0; i < exitCards2; i++) {
                 result[4].add(players[1].cards.get(i).health);
             }
         }
         return result;
+    }
+    public static int changeToInt(String s){
+        int res=0;
+        for (int i = 0; i < s.length(); i++) {
+            res=res*10+(s.charAt(i)-'0');
+        }
+        return res;
     }
 }
 
