@@ -15,12 +15,12 @@ public class Report2 {
         for (int i = 0; i < n; i++) {
             operation[i]=sc.nextLine();
         }
-        ArrayList<Integer>[] result=new ArrayList[5];
-        result[0]= new ArrayList<>();
-        result[1]=new ArrayList<>();
-        result[2]=new ArrayList<>();
-        result[3]=new ArrayList<>();
-        result[4]=new ArrayList<>();
+        ArrayList[] result=new ArrayList[5];
+        result[0]= new ArrayList<Integer>();
+        result[1]=new ArrayList<Integer>();
+        result[2]=new ArrayList<Integer>();
+        result[3]=new ArrayList<Integer>();
+        result[4]=new ArrayList<Integer>();
         result=game(operation);
         final int resultLine=5;
         for(int i=0;i<resultLine;i++){
