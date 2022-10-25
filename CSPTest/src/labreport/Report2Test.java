@@ -47,4 +47,21 @@ class Report2Test {
         int res= Report2.changeToInt(s);
         assertEquals(res,1212212);
     }
+
+    @Test
+    void wrong(){
+
+
+        ArrayList<Integer>[] result=new ArrayList[5];
+        result[0]=new ArrayList<>();
+        result[1]=new ArrayList<>();
+        result[2]=new ArrayList<>();
+        result[3]=new ArrayList<>();
+        result[4]=new ArrayList<>();
+
+
+
+        result[0].add(0);
+        result[0].get(0);
+    }
 }
