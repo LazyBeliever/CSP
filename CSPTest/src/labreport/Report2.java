@@ -10,17 +10,21 @@ public class Report2 {
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
         String temp=sc.nextLine();
+        //输入数据
         int n=changeToInt(temp);
         String[] operation=new String[n];
         for (int i = 0; i < n; i++) {
             operation[i]=sc.nextLine();
         }
+        //构造存放结果的容器
         int resultLines=5;
         ArrayList<ArrayList<Integer>> result=new ArrayList<>(5);
         for(int i = 0;i < resultLines;i++){
             result.add(new ArrayList<>());
         }
+        //对局
         result=game(operation);
+        //输出
         final int resultLine=5;
         for(int i=0;i<resultLine;i++){
             if(!result.get(i).isEmpty())
@@ -28,7 +32,7 @@ public class Report2 {
                 for(int j=0;j<result.get(i).size();j++){
                     System.out.print(result.get(i).get(j)+" ");
                 }
-            }else{
+            }else{  //场上卡牌数为0时
                 System.out.print(0);
             }
             System.out.println();
@@ -38,7 +42,7 @@ public class Report2 {
     /**
      *
      * @param s String形式的全部操作
-     * @return 题目要求的五行数据，用ArrayList[] 返回
+     * @return 题目要求的五行数据，用ArrayList<ArrayList<Integer>> 返回
      */
     public static ArrayList<ArrayList<Integer>> game(String[] s){
         Player[] players=new Player[2];
@@ -188,6 +192,3 @@ class Player {
         enemy.health-=this.cards.get(index).attack;
     }
 }
-
-
-
